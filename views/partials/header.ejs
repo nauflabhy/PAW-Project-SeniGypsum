@@ -1,14 +1,16 @@
-<header class="site-header">
-    <div class="wrap nav">
-        <a class="brand" href="/">
-            <span class="brand-mark">G</span>
+<% const aktif = 'text-brand-dark font-semibold underline decoration-2 underline-offset-8'; %>
+<% const biasa = 'text-muted hover:text-brand-dark'; %>
+<header class="sticky top-0 z-10 border-b border-line bg-paper">
+    <div class="mx-auto grid w-[min(100%-3rem,70rem)] grid-cols-[1fr_auto] items-center gap-4 py-4 md:grid-cols-[1fr_auto_1fr]">
+        <a class="inline-flex items-center gap-2.5 text-[.95rem] font-semibold text-ink no-underline" href="/">
+            <span class="grid h-7 w-7 place-items-center rounded-[5px] bg-brand text-sm font-bold text-white">G</span>
             Toko Seni Gypsum
         </a>
-        <nav class="nav-links" aria-label="Navigasi utama">
-            <a href="/" <%- active === 'beranda' ? 'aria-current="page"' : '' %>>Beranda</a>
-            <a href="/#produk">Produk</a>
-            <a href="/bantuan" <%- active === 'bantuan' ? 'aria-current="page"' : '' %>>Bantuan</a>
+        <nav class="hidden gap-8 text-sm md:flex" aria-label="Navigasi utama">
+            <a class="<%= active === 'beranda' ? aktif : biasa %>" href="/" <%- active === 'beranda' ? 'aria-current="page"' : '' %>>Beranda</a>
+            <a class="<%= biasa %>" href="/#produk">Produk</a>
+            <a class="<%= active === 'bantuan' ? aktif : biasa %>" href="/bantuan" <%- active === 'bantuan' ? 'aria-current="page"' : '' %>>Bantuan</a>
         </nav>
-        <a class="btn btn-outline btn-sm" href="/bantuan">Tanya kami &rarr;</a>
+        <a class="justify-self-end rounded border border-brand px-4 py-2 text-sm font-semibold text-brand-dark no-underline transition-colors hover:bg-brand hover:text-white" href="/bantuan">Tanya kami &rarr;</a>
     </div>
 </header>

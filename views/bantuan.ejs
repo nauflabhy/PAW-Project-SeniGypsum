@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bantuan | Toko Seni Gypsum</title>
-    <link rel="stylesheet" href="/style.css">
+    <%- include('partials/head', { title: 'Bantuan | Toko Seni Gypsum' }) %>
 </head>
-<body>
+<body class="bg-white font-sans text-base leading-relaxed text-ink antialiased">
 
     <%- include('partials/header', { active: 'bantuan' }) %>
 
-    <main class="help">
-        <div class="wrap">
-            <div class="help-intro">
-                <p class="eyebrow">Kami siap membantu</p>
-                <h1>Ada yang ingin ditanyakan?</h1>
-                <p class="lead">Pilih topik atau tuliskan pertanyaan Anda di bawah.</p>
+    <main class="min-h-[calc(100vh-12rem)] bg-paper pb-24 pt-10 sm:pt-16">
+        <div class="mx-auto w-[min(100%-3rem,70rem)]">
+            <div class="mb-10 text-center">
+                <p class="mb-4 text-xs font-bold uppercase tracking-[.12em] text-brand">Kami siap membantu</p>
+                <h1 class="mb-4 font-display text-4xl font-normal leading-[1.1] tracking-tight text-brand-dark sm:text-5xl">Ada yang ingin ditanyakan?</h1>
+                <p class="mx-auto max-w-[44ch] text-muted">Pilih topik atau tuliskan pertanyaan Anda di bawah.</p>
             </div>
 
-            <section class="help-panel" aria-labelledby="help-title"
+            <section id="chat-panel" class="mx-auto max-w-2xl overflow-hidden rounded-[10px] border border-line bg-white" aria-labelledby="help-title"
                      <% if (produkDipilih) { %>data-produk="<%= produkDipilih.name %>"<% } %>>
-                <div class="help-head">
-                    <span class="avatar">S</span>
+                <div class="flex items-center gap-3.5 border-b border-line px-6 py-4">
+                    <span class="grid h-8 w-8 place-items-center rounded-full bg-brand text-sm font-bold text-white">S</span>
                     <div>
-                        <strong id="help-title">Asisten Toko Seni</strong>
-                        <span class="chat-status">Siap membantu</span>
+                        <strong id="help-title" class="block text-[.95rem] leading-snug">Asisten Toko Seni</strong>
+                        <span class="flex items-center gap-1.5 text-xs text-muted"><span class="h-1.5 w-1.5 rounded-full bg-dot"></span>Siap membantu</span>
                     </div>
-                    <span class="help-label">Bantuan</span>
+                    <span class="ml-auto text-xs font-bold uppercase tracking-widest text-muted">Bantuan</span>
                 </div>
 
-                <div class="help-log" id="chat-log" role="log" aria-live="polite" aria-label="Percakapan"></div>
+                <div id="chat-log" class="flex h-72 flex-col gap-2.5 overflow-y-auto bg-paper px-6 py-5 sm:h-[22rem]" role="log" aria-live="polite" aria-label="Percakapan"></div>
 
-                <div class="help-chips chips" id="chat-chips" aria-label="Topik cepat">
-                    <button type="button" class="chip" data-pesan="Informasi produk">Informasi produk</button>
-                    <button type="button" class="chip" data-pesan="Layanan pemasangan">Layanan pemasangan</button>
-                    <button type="button" class="chip" data-pesan="Pertanyaan lainnya">Pertanyaan lainnya</button>
+                <div id="chat-chips" class="flex flex-wrap gap-2 border-t border-line px-6 py-3.5" aria-label="Topik cepat">
+                    <button type="button" data-pesan="Informasi produk" class="">Informasi produk</button>
+                    <button type="button" data-pesan="Layanan pemasangan" class="">Layanan pemasangan</button>
+                    <button type="button" data-pesan="Pertanyaan lainnya" class="">Pertanyaan lainnya</button>
                 </div>
 
-                <form class="help-form" id="chat-form" autocomplete="off">
+                <form id="chat-form" class="flex gap-3 px-6" autocomplete="off">
                     <label class="sr-only" for="pesan">Tulis pertanyaan Anda</label>
-                    <input id="pesan" name="pesan" type="text" maxlength="300" placeholder="Tulis pertanyaan Anda..." required>
-                    <button class="btn btn-primary" type="submit">Kirim &uarr;</button>
+                    <input id="pesan" name="pesan" type="text" maxlength="300" required placeholder="Tulis pertanyaan Anda..."
+                           class="min-w-0 flex-1 rounded border border-line px-4 py-3 text-[.95rem] text-ink focus:border-brand">
+                    <button type="submit" class="rounded border border-brand bg-brand px-6 py-3 text-[.95rem] font-semibold text-white transition-colors hover:bg-brand-dark">Kirim &uarr;</button>
                 </form>
-                <p class="help-note">Asisten memberikan informasi berdasarkan data toko yang tersedia.</p>
+                <p class="px-6 pb-5 pt-3 text-xs text-[#6f7c74]">Asisten memberikan informasi berdasarkan data toko yang tersedia.</p>
             </section>
         </div>
     </main>
@@ -50,6 +48,87 @@
     <%- include('partials/footer') %>
     <%- include('partials/chat-fab', { fabHref: '#pesan' }) %>
 
-    <script src="/chat.js"></script>
+    <script>
+    (function () {
+      var CHIP = 'rounded-full border border-line bg-white px-3.5 py-1.5 text-[.8rem] font-medium text-brand-dark transition-colors hover:bg-sage-light';
+      var BUBBLE = 'max-w-[82%] whitespace-pre-line rounded-lg px-3.5 py-2.5 text-[.9rem] leading-normal ';
+      var BUBBLE_IN = BUBBLE + 'self-start border border-line bg-white text-ink';
+      var BUBBLE_OUT = BUBBLE + 'self-end bg-brand text-white';
+
+      var panel = document.getElementById('chat-panel');
+      var log = document.getElementById('chat-log');
+      var chips = document.getElementById('chat-chips');
+      var form = document.getElementById('chat-form');
+      var input = document.getElementById('pesan');
+      var sibuk = false;
+
+      // Gaya chip awal (dirender server) disamakan dengan chip dinamis
+      Array.prototype.forEach.call(chips.querySelectorAll('button'), function (b) { b.className = CHIP; });
+
+      function tambahBubble(teks, arah) {
+        var el = document.createElement('div');
+        el.className = arah === 'out' ? BUBBLE_OUT : BUBBLE_IN;
+        el.textContent = teks; // textContent: aman dari injeksi HTML
+        log.appendChild(el);
+        log.scrollTop = log.scrollHeight;
+        return el;
+      }
+
+      function isiSaran(daftar) {
+        chips.textContent = '';
+        daftar.forEach(function (teks) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = CHIP;
+          b.dataset.pesan = teks;
+          b.textContent = teks;
+          chips.appendChild(b);
+        });
+      }
+
+      function kirim(teks) {
+        teks = teks.trim();
+        if (!teks || sibuk) return;
+        sibuk = true;
+        tambahBubble(teks, 'out');
+        var mengetik = tambahBubble('Mengetik...', 'in');
+        mengetik.classList.add('italic', 'text-muted');
+
+        fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: teks })
+        })
+          .then(function (res) { return res.json().then(function (d) { return { ok: res.ok, data: d }; }); })
+          .then(function (r) {
+            mengetik.remove();
+            if (!r.ok) throw new Error(r.data.message || 'Terjadi kesalahan.');
+            tambahBubble(r.data.reply, 'in');
+            if (r.data.suggestions) isiSaran(r.data.suggestions);
+          })
+          .catch(function () {
+            mengetik.remove();
+            tambahBubble('Pesan belum terkirim. Periksa koneksi Anda lalu coba lagi.', 'in');
+          })
+          .then(function () { sibuk = false; input.focus(); });
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var teks = input.value;
+        input.value = '';
+        kirim(teks);
+      });
+
+      chips.addEventListener('click', function (e) {
+        var tombol = e.target.closest('button[data-pesan]');
+        if (tombol) kirim(tombol.dataset.pesan);
+      });
+
+      // Sapaan awal; jika datang dari "Tanya produk ini", langsung bahas produk itu
+      tambahBubble('Halo! Saya asisten Toko Seni Gypsum. Pilih topik di bawah atau tulis pertanyaan Anda.', 'in');
+      if (panel.dataset.produk) kirim(panel.dataset.produk);
+    })();
+    </script>
 </body>
 </html>
