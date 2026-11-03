@@ -18,6 +18,11 @@ app.use(loggerMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Mengirim file CSS dari folder views saat browser meminta /style.css
+app.get('/style.css', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'style.css'));
+});
+
 // 3. Registrasi Routing / Endpoint
 app.use('/', viewRoutes);         // Route halaman utama (frontend)
 app.use('/api', apiRoutes);       // Route khusus API

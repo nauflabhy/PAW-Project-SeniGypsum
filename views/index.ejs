@@ -1,58 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frontend Dashboard - Week 7</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://tailwindcss.com"></script>
+    <title>Beranda | Toko Seni Gypsum</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body class="bg-gray-100 font-sans antialiased">
+<body>
 
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <!-- Header -->
-        <header class="mb-8 text-center md:text-left">
-            <h1 class="text-3xl font-bold text-gray-800">📦 Sistem Manajemen Produk</h1>
-            <p class="text-gray-600 mt-1">Halaman Frontend Dinamis berbasis Express.js & EJS (Arsitektur MVC)</p>
-        </header>
+    <!-- Navbar -->
+    <header class="site-header">
+        <div class="wrap nav">
+            <a class="brand" href="/">
+                <span class="brand-mark">G</span>
+                Toko Seni Gypsum
+            </a>
+            <nav class="nav-links" aria-label="Navigasi utama">
+                <a href="#fitur">Fitur</a>
+                <a href="#produk">Produk</a>
+                <a href="#tentang">Tentang</a>
+            </nav>
+            <a class="btn btn-outline btn-sm" href="/api/produk" target="_blank">Lihat API &rarr;</a>
+        </div>
+    </header>
 
-        <!-- Main Content -->
-        <main class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">Daftar Produk Tersedia (diambil dari Backend)</h2>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-gray-800 text-white">
-                            <th class="py-3 px-4 rounded-l-lg">ID</th>
-                            <th class="py-3 px-4">Nama Produk</th>
-                            <th class="py-3 px-4">Harga</th>
-                            <th class="py-3 px-4">Kategori</th>
-                            <th class="py-3 px-4 rounded-r-lg">Spesifikasi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <% produkList.forEach(function(produk) { %>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="py-3 px-4 font-medium text-gray-600"><%= produk.id %></td>
-                                <td class="py-3 px-4 text-gray-800 font-semibold"><%= produk.name %></td>
-                                <td class="py-3 px-4 text-emerald-600 font-bold">
-                                    Rp <%= produk.price.toLocaleString('id-ID') %>
-                                </td>
-                                <td class="py-3 px-4"><%= produk.category %></td>
-                                <td class="py-3 px-4"><%= produk.spec %></td>
-                            </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Asisten belanja yang selalu siap</p>
+                    <h1 class="hero-title">Cari bahan bangunan jadi <em>lebih mudah.</em></h1>
+                    <p class="lead">Kenali prototipe chatbot Toko Seni Gypsum: teman praktis untuk menemukan produk, memahami pemasangan, dan mendapatkan jawaban dengan cepat.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#fitur">Jelajahi fitur &rarr;</a>
+                        <a class="link-underline" href="#produk">Lihat katalog produk</a>
+                    </div>
+                    <p class="hero-note">Dirancang untuk kebutuhan pelanggan Toko Seni Gypsum</p>
+                </div>
+
+                <!-- Ilustrasi percakapan chatbot -->
+                <div class="chat" aria-label="Contoh percakapan chatbot">
+                    <div class="chat-head">
+                        <span class="avatar">G</span>
+                        <div>
+                            <strong>Asisten Gypsum</strong>
+                            <span class="chat-status">Siap membantu</span>
+                        </div>
+                        <span class="chat-menu" aria-hidden="true">&middot;&middot;&middot;</span>
+                    </div>
+                    <p class="chat-day">Hari ini, 09.41</p>
+                    <div class="bubble bubble-in">Halo! Sedang mencari bahan untuk proyek plafon?</div>
+                    <div class="bubble bubble-out">Apa saja yang dibutuhkan untuk memasang plafon gypsum?</div>
+                    <div class="bubble bubble-in">Umumnya Anda memerlukan papan gypsum, rangka hollow, sekrup, dan kompon. Saya bisa bantu jelaskan satu per satu.</div>
+                    <div class="chips">
+                        <span class="chip">Daftar produk</span>
+                        <span class="chip">Panduan pasang</span>
+                    </div>
+                    <div class="chat-input">
+                        <span>Tulis pesan...</span>
+                        <span class="send" aria-hidden="true">&uarr;</span>
+                    </div>
+                    <p class="chat-caption">Ilustrasi percakapan chatbot</p>
+                </div>
             </div>
-        </main>
+        </section>
 
-        <!-- Footer -->
-        <footer class="mt-8 text-center text-sm text-gray-500">
-            <p>&copy; 2026 Project Kelompok Web Service - All Rights Reserved.</p>
-        </footer>
-    </div>
+        <!-- Fitur -->
+        <section class="section section-white" id="fitur">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Melayani dengan lebih siap</p>
+                        <h2><span class="underlined">Satu asisten, banyak bantuan.</span></h2>
+                    </div>
+                    <p>Informasi penting tersedia dalam satu percakapan, dari memilih produk sampai memulai pemasangan.</p>
+                </div>
+
+                <div class="features">
+                    <article class="feature">
+                        <span class="feature-no">01</span>
+                        <span class="icon icon-green">&#9638;</span>
+                        <h3>Informasi produk</h3>
+                        <p>Kenali bahan dan perlengkapan seperti gypsum, hollow, serta cat yang tersedia.</p>
+                    </article>
+                    <article class="feature">
+                        <span class="feature-no">02</span>
+                        <span class="icon icon-peach">&#8599;</span>
+                        <h3>Panduan pemasangan</h3>
+                        <p>Dapatkan gambaran kebutuhan dan langkah dasar untuk pengerjaan plafon gypsum.</p>
+                    </article>
+                    <article class="feature">
+                        <span class="feature-no">03</span>
+                        <span class="icon icon-blue">&#9719;</span>
+                        <h3>Jawaban lebih cepat</h3>
+                        <p>Chatbot membantu menjawab pertanyaan umum tanpa harus menunggu staf tersedia.</p>
+                    </article>
+                    <article class="feature">
+                        <span class="feature-no">04</span>
+                        <span class="icon icon-rose">&#10003;</span>
+                        <h3>Bantuan pemesanan</h3>
+                        <p>Mulai percakapan pemesanan dengan informasi yang lebih jelas dan terarah.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Produk (data dari backend) -->
+        <section class="section section-paper" id="produk">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Katalog toko</p>
+                        <h2><span class="underlined">Produk tersedia.</span></h2>
+                    </div>
+                    <p>Daftar ini diambil langsung dari backend, sama dengan data di endpoint <a href="/api/produk" target="_blank">/api/produk</a>.</p>
+                </div>
+
+                <div class="product-grid">
+                    <% produkList.forEach(function(produk) { %>
+                        <article class="product">
+                            <div class="product-top">
+                                <span class="tag"><%= produk.category %></span>
+                                <span class="product-id">ID <%= produk.id %></span>
+                            </div>
+                            <h3><%= produk.name %></h3>
+                            <p><%= produk.spec %></p>
+                            <p class="price">Rp <%= produk.price.toLocaleString('id-ID') %></p>
+                        </article>
+                    <% }); %>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tentang -->
+        <section class="section section-sage" id="tentang">
+            <div class="wrap about">
+                <div>
+                    <p class="eyebrow">Tentang proyek</p>
+                    <h2>Dibangun dengan Express.js dan EJS.</h2>
+                </div>
+                <p class="about-text">Prototipe ini dikembangkan sebagai studi kasus Toko Seni Gypsum. Halaman dirender oleh server dengan arsitektur MVC, dan datanya dilayani lewat endpoint API.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>&copy; 2026 Toko Seni Gypsum &middot; Project Kelompok Web Service</p>
+            <p>Tim: Aryarez, Muhammad Naufal, Radiva, Andhika</p>
+        </div>
+    </footer>
 
 </body>
 </html>
