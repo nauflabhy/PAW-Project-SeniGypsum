@@ -23,6 +23,9 @@ app.get('/style.css', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'style.css'));
 });
 
+// File statis (JavaScript klien chatbot) dari folder public
+app.use(express.static(path.join(__dirname, 'public')));
+
 // 3. Registrasi Routing / Endpoint
 app.use('/', viewRoutes);         // Route halaman utama (frontend)
 app.use('/api', apiRoutes);       // Route khusus API

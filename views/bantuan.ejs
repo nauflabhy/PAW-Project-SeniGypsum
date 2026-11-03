@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bantuan | Toko Seni Gypsum</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('partials/header', { active: 'bantuan' }) %>
+
+    <main class="help">
+        <div class="wrap">
+            <div class="help-intro">
+                <p class="eyebrow">Kami siap membantu</p>
+                <h1>Ada yang ingin ditanyakan?</h1>
+                <p class="lead">Pilih topik atau tuliskan pertanyaan Anda di bawah.</p>
+            </div>
+
+            <section class="help-panel" aria-labelledby="help-title"
+                     <% if (produkDipilih) { %>data-produk="<%= produkDipilih.name %>"<% } %>>
+                <div class="help-head">
+                    <span class="avatar">S</span>
+                    <div>
+                        <strong id="help-title">Asisten Toko Seni</strong>
+                        <span class="chat-status">Siap membantu</span>
+                    </div>
+                    <span class="help-label">Bantuan</span>
+                </div>
+
+                <div class="help-log" id="chat-log" role="log" aria-live="polite" aria-label="Percakapan"></div>
+
+                <div class="help-chips chips" id="chat-chips" aria-label="Topik cepat">
+                    <button type="button" class="chip" data-pesan="Informasi produk">Informasi produk</button>
+                    <button type="button" class="chip" data-pesan="Layanan pemasangan">Layanan pemasangan</button>
+                    <button type="button" class="chip" data-pesan="Pertanyaan lainnya">Pertanyaan lainnya</button>
+                </div>
+
+                <form class="help-form" id="chat-form" autocomplete="off">
+                    <label class="sr-only" for="pesan">Tulis pertanyaan Anda</label>
+                    <input id="pesan" name="pesan" type="text" maxlength="300" placeholder="Tulis pertanyaan Anda..." required>
+                    <button class="btn btn-primary" type="submit">Kirim &uarr;</button>
+                </form>
+                <p class="help-note">Asisten memberikan informasi berdasarkan data toko yang tersedia.</p>
+            </section>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+    <%- include('partials/chat-fab', { fabHref: '#pesan' }) %>
+
+    <script src="/chat.js"></script>
+</body>
+</html>

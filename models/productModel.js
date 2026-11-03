@@ -9,6 +9,10 @@ const products = [
 const Product = {
   getAll: () => {
     return products;
+  },
+
+  getById: (id) => {
+    return products.find((p) => p.id === Number(id)) || null;
   }
 };
 
