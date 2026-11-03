@@ -438,3 +438,146 @@ a { color: var(--green); }
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
+/* ---------- Navigasi aktif ---------- */
+.nav-links a[aria-current="page"] {
+  color: var(--green-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+
+/* ---------- Tombol melayang "Butuh bantuan?" ---------- */
+.chat-fab {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .8rem 1.2rem;
+  border-radius: 6px;
+  background: var(--green);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 12px 28px -10px rgba(20, 61, 46, .55);
+  transition: background-color .15s ease;
+}
+.chat-fab:hover { background: var(--green-dark); }
+.chat-fab:focus-visible { outline-color: var(--dot); }
+
+/* ---------- Tautan tanya di kartu produk ---------- */
+.product-ask {
+  margin-top: .9rem;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  text-underline-offset: 4px;
+}
+
+/* ---------- Halaman bantuan ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.help {
+  min-height: calc(100vh - 12rem);
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) 6rem;
+  background: var(--paper);
+}
+.help-intro { text-align: center; margin-bottom: 2.5rem; }
+.help-intro .eyebrow { justify-content: center; }
+.help-intro h1 { font-size: clamp(2.1rem, 4vw + .5rem, 3.4rem); margin-bottom: 1rem; }
+.help-intro .lead { margin-inline: auto; }
+
+.help-panel {
+  max-width: 44rem;
+  margin-inline: auto;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.help-head {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.help-head strong { display: block; font-size: .95rem; line-height: 1.3; }
+.help-label {
+  margin-left: auto;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.help-log {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  height: 22rem;
+  padding: 1.25rem 1.5rem;
+  overflow-y: auto;
+  background: var(--paper);
+}
+.help-log .bubble {
+  margin: 0;
+  max-width: 82%;
+  font-size: .9rem;
+  white-space: pre-line;
+}
+.help-log .bubble-in { background: var(--white); border: 1px solid var(--line); }
+.help-log .bubble-out { align-self: flex-end; margin-left: 0; }
+.bubble-typing { color: var(--muted); font-style: italic; }
+
+.help-chips {
+  margin: 0;
+  padding: .9rem 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.help-chips .chip {
+  padding: .4rem .95rem;
+  background: var(--white);
+  font: 500 .8rem var(--font-body);
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.help-chips .chip:hover { background: var(--sage-light); }
+
+.help-form {
+  display: flex;
+  gap: .75rem;
+  padding: 0 1.5rem;
+}
+.help-form input {
+  flex: 1;
+  min-width: 0;
+  padding: .85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font: 400 .95rem var(--font-body);
+  color: var(--ink);
+}
+.help-form input:focus-visible { outline-offset: 0; border-color: var(--green); }
+.help-note {
+  padding: .75rem 1.5rem 1.25rem;
+  font-size: .72rem;
+  color: #6f7c74;
+}
+
+@media (max-width: 40rem) {
+  .help-log { height: 18rem; }
+  .chat-fab { right: .75rem; bottom: .75rem; }
+}

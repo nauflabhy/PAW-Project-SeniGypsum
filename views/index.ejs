@@ -8,21 +8,7 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <header class="site-header">
-        <div class="wrap nav">
-            <a class="brand" href="/">
-                <span class="brand-mark">G</span>
-                Toko Seni Gypsum
-            </a>
-            <nav class="nav-links" aria-label="Navigasi utama">
-                <a href="#fitur">Fitur</a>
-                <a href="#produk">Produk</a>
-                <a href="#tentang">Tentang</a>
-            </nav>
-            <a class="btn btn-outline btn-sm" href="/api/produk" target="_blank">Lihat API &rarr;</a>
-        </div>
-    </header>
+    <%- include('partials/header', { active: 'beranda' }) %>
 
     <main>
         <!-- Hero -->
@@ -33,7 +19,7 @@
                     <h1 class="hero-title">Cari bahan bangunan jadi <em>lebih mudah.</em></h1>
                     <p class="lead">Kenali prototipe chatbot Toko Seni Gypsum: teman praktis untuk menemukan produk, memahami pemasangan, dan mendapatkan jawaban dengan cepat.</p>
                     <div class="hero-actions">
-                        <a class="btn btn-primary" href="#fitur">Jelajahi fitur &rarr;</a>
+                        <a class="btn btn-primary" href="/bantuan">Tanya asisten &rarr;</a>
                         <a class="link-underline" href="#produk">Lihat katalog produk</a>
                     </div>
                     <p class="hero-note">Dirancang untuk kebutuhan pelanggan Toko Seni Gypsum</p>
@@ -127,6 +113,7 @@
                             <h3><%= produk.name %></h3>
                             <p><%= produk.spec %></p>
                             <p class="price">Rp <%= produk.price.toLocaleString('id-ID') %></p>
+                            <a class="product-ask" href="/bantuan?produk=<%= produk.id %>">Tanya produk ini &rarr;</a>
                         </article>
                     <% }); %>
                 </div>
@@ -145,12 +132,8 @@
         </section>
     </main>
 
-    <footer class="site-footer">
-        <div class="wrap">
-            <p>&copy; 2026 Toko Seni Gypsum &middot; Project Kelompok Web Service</p>
-            <p>Tim: Aryarez, Muhammad Naufal, Radiva, Andhika</p>
-        </div>
-    </footer>
+    <%- include('partials/footer') %>
+    <%- include('partials/chat-fab') %>
 
 </body>
 </html>
